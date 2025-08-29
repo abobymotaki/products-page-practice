@@ -2,10 +2,9 @@
 import InputError from '@/components/InputError.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { edit } from '@/routes/password/index.ts';
+import { edit } from '@/routes/password/index';
 import { Form, Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
-import { LoaderCircle } from 'lucide-vue-next';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import { Button } from '@/components/ui/button';
