@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Checkbox from '@/components/Checkbox.vue';
+import { Checkbox } from '@/components/ui/checkbox';
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
