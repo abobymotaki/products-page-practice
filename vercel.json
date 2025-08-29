@@ -9,7 +9,7 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "php artisan wayfinder:generate --with-form && npm run build",
+        "buildCommand": "npm run build:production",
         "outputDirectory": "public"
       }
     }
