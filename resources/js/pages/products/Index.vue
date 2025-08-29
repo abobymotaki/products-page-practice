@@ -5,13 +5,12 @@ import { type BreadcrumbItem } from '@/types';
 import { Head, Link, usePage, router } from '@inertiajs/vue3';
 import { Rocket } from 'lucide-vue-next';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { edit, destroy } from '@/routes/products/index';
-import { route } from 'ziggy-js';
+import { productsIndex, productsCreate, productsEdit, productsDestroy } from '@/routes';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Products',
-        href: '/products',
+        href: productsIndex(),
     },
 ];
 
@@ -32,7 +31,7 @@ const props = defineProps<Props>();
 
 const deleteProduct = (id: number) => {
     if (confirm("Are you sure you want to delete the product?")) {
-        router.delete(destroy(id).url);
+        router.delete(productsDestroy(id).url);
     }
 }
 </script>
@@ -49,7 +48,7 @@ const deleteProduct = (id: number) => {
             </div>
         </div>
         <div class="p-4">
-            <Link :href="'./products/create'"><Button>Create A Product</Button></Link>
+            <Link :href="productsCreate()"><Button>Create A Product</Button></Link>
         </div>
 
         <div class="p-4">
@@ -71,7 +70,7 @@ const deleteProduct = (id: number) => {
                     <TableCell>{{ product.description }}</TableCell>
                     <TableCell class="text-right">${{ product.price }}</TableCell>
                     <TableCell class="text-center space-x-2">
-                        <Link :href="edit(product.id).url"><Button class="bg-slate-600 text-white rounded-sm px-5">Edit</Button></Link>
+                        <Link :href="productsEdit(product.id).url"><Button class="bg-slate-600 text-white rounded-sm px-5">Edit</Button></Link>
                         <Button class="bg-red-600 text-white rounded-sm px-5" @click="deleteProduct(product.id)">Delete</Button>
                     </TableCell>
                 </TableRow>

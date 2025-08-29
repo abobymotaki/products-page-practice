@@ -9,8 +9,7 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import { Form, Head, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 import { register } from '@/routes';
-import { request } from '@/routes/password/index';
-import { route } from 'ziggy-js';
+import { forgotPassword } from '@/routes';
 
 defineProps<{
     canResetPassword?: boolean;
@@ -71,7 +70,7 @@ const handleSubmit = () => {
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
                         <Label for="password">Password</Label>
-                        <TextLink v-if="canResetPassword" :href="request()" class="text-sm" :tabindex="5"> Forgot password? </TextLink>
+                        <TextLink v-if="canResetPassword" :href="forgotPassword()" class="text-sm" :tabindex="5"> Forgot password? </TextLink>
                     </div>
                     <Input
                         id="password"

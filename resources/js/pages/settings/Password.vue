@@ -2,7 +2,7 @@
 import InputError from '@/components/InputError.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { edit } from '@/routes/password/index';
+import { passwordEdit } from '@/routes';
 import { Form, Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -16,7 +16,7 @@ import { route } from 'ziggy-js';
 const breadcrumbItems: BreadcrumbItem[] = [
     {
         title: 'Password settings',
-        href: edit().url,
+        href: passwordEdit().url,
     },
 ];
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { edit, update } from '@/routes/profile/index';
-import { send } from '@/routes/verification/index';
+import { profileEdit, profileUpdate } from '@/routes';
+import { verificationSend } from '@/routes';
 import { Form, Head, Link, useForm, usePage } from '@inertiajs/vue3';
 
 import DeleteUser from '@/components/DeleteUser.vue';
@@ -12,7 +12,6 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { route } from 'ziggy-js';
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -24,7 +23,7 @@ const props = defineProps<Props>();
 const breadcrumbItems: BreadcrumbItem[] = [
     {
         title: 'Profile settings',
-        href: edit().url,
+        href: profileEdit().url,
     },
 ];
 
@@ -45,7 +44,7 @@ const form = useForm({
             <div class="flex flex-col space-y-6">
                 <HeadingSmall title="Profile information" description="Update your name and email address" />
 
-                <Form :form="form" @submit="form.patch(update().url)" class="space-y-6" reset-on-success v-slot="{ errors, processing, recentlySuccessful }">
+                <Form :form="form" @submit="form.patch(profileUpdate().url)" class="space-y-6" reset-on-success v-slot="{ errors, processing, recentlySuccessful }">
                     <div class="grid gap-2">
                         <Label for="name">Name</Label>
                         <Input
@@ -79,7 +78,7 @@ const form = useForm({
                         <p class="-mt-4 text-sm text-muted-foreground">
                             Your email address is unverified.
                             <Link
-                                :href="send().url"
+                                :href="verificationSend().url"
                                 method="post"
                                 as="button"
                                 class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
