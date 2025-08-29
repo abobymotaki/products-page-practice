@@ -5,7 +5,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Head, Link, usePage, router } from '@inertiajs/vue3';
 import { Rocket } from 'lucide-vue-next';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { edit } from '@/routes/products/index'
+import { edit } from '@/routes/products'
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
