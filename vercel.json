@@ -17,7 +17,7 @@
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie"
   },
-  "buildCommand": "composer install --no-dev --optimize-autoloader && npm ci && npm run build",
-  "installCommand": "npm install",
+  "buildCommand": "npm ci && npm run build",
+  "installCommand": "curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && composer install --no-dev --optimize-autoloader && npm install",
   "outputDirectory": "public"
 }
