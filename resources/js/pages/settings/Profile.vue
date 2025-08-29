@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { edit } from '@/routes/profile/index';
+import { edit, update } from '@/routes/profile/index';
 import { send } from '@/routes/verification/index';
-import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+import { Form, Head, Link, useForm, usePage } from '@inertiajs/vue3';
 
 import DeleteUser from '@/components/DeleteUser.vue';
 import HeadingSmall from '@/components/HeadingSmall.vue';
@@ -44,14 +44,14 @@ const form = useForm({
             <div class="flex flex-col space-y-6">
                 <HeadingSmall title="Profile information" description="Update your name and email address" />
 
-                <Form :form="form" @submit="form.patch('/profile')" class="space-y-6" reset-on-success v-slot="{ errors, processing, recentlySuccessful }">
+                <Form :form="form" @submit="form.patch(update().url)" class="space-y-6" reset-on-success v-slot="{ errors, processing, recentlySuccessful }">
                     <div class="grid gap-2">
                         <Label for="name">Name</Label>
                         <Input
                             id="name"
                             class="mt-1 block w-full"
                             name="name"
-                            :default-value="user.name"
+                            v-model="form.name"
                             required
                             autocomplete="name"
                             placeholder="Full name"
@@ -66,7 +66,7 @@ const form = useForm({
                             type="email"
                             class="mt-1 block w-full"
                             name="email"
-                            :default-value="user.email"
+                            v-model="form.email"
                             required
                             autocomplete="username"
                             placeholder="Email address"
@@ -78,7 +78,8 @@ const form = useForm({
                         <p class="-mt-4 text-sm text-muted-foreground">
                             Your email address is unverified.
                             <Link
-                                :href="send()"
+                                :href="send().url"
+                                method="post"
                                 as="button"
                                 class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
                             >
