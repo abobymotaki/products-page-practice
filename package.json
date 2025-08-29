@@ -2,10 +2,12 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "php artisan migrate --force && vite build",
-        "build:production": "php artisan migrate --force && cross-env DISABLE_WAYFINDER=true vite build",
+        "build": "powershell -ExecutionPolicy Bypass -File setup-database.ps1 && vite build",
+        "build:production": "powershell -ExecutionPolicy Bypass -File setup-database.ps1 && cross-env DISABLE_WAYFINDER=true vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
+        "setup:db": "powershell -ExecutionPolicy Bypass -File setup-database.ps1",
+        "setup:db:unix": "bash setup-database-unix.sh",
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix"
