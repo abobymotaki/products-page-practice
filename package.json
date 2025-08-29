@@ -2,8 +2,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "build:production": "cross-env DISABLE_WAYFINDER=true vite build",
+        "build": "php artisan migrate --force && vite build",
+        "build:production": "php artisan migrate --force && cross-env DISABLE_WAYFINDER=true vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
         "format": "prettier --write resources/",
