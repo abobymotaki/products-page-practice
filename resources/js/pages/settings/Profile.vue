@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { edit } from '@/routes/profile';
+import { edit } from '@/routes/profile/index';
 import { send } from '@/routes/verification';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 
