@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
+import path from 'path';
 
 const plugins = [
     laravel({
@@ -30,4 +31,9 @@ if (!process.env.DISABLE_WAYFINDER && process.env.NODE_ENV !== 'production') {
 
 export default defineConfig({
     plugins,
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './resources/js'),
+        },
+    },
 });
