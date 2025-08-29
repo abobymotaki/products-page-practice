@@ -1,10 +1,17 @@
 {
   "version": 2,
-  "functions": {
-    "api/index.php": {
-      "runtime": "vercel-php@0.6.0"
+  "builds": [
+    {
+      "src": "api/index.php",
+      "use": "vercel-php@0.6.0",
+      "config": {
+        "phpVersion": "8.0",
+        "installCommand": "curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && composer install --no-dev --optimize-autoloader && npm install",
+        "buildCommand": "npm ci && npm run build",
+        "outputDirectory": "public"
+      }
     }
-  },
+  ],
   "routes": [
     {
       "src": "/(.*)",
@@ -16,8 +23,5 @@
     "APP_DEBUG": "false",
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie"
-  },
-  "buildCommand": "npm ci && npm run build",
-  "installCommand": "curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && composer install --no-dev --optimize-autoloader && npm install",
-  "outputDirectory": "public"
+  }
 }
