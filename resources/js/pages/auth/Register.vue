@@ -8,6 +8,7 @@ import AuthBase from '@/layouts/AuthLayout.vue';
 import { login } from '@/routes';
 import { Form, Head, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import { route } from 'ziggy-js';
 
 const form = useForm({
     name: '',

@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { Form, Head, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import { route } from 'ziggy-js';
 
 const props = defineProps<{
     email: string;

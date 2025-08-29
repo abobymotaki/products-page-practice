@@ -10,6 +10,7 @@ import { Form, Head, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 import { register } from '@/routes';
 import { request } from '@/routes/password/index';
+import { route } from 'ziggy-js';
 
 defineProps<{
     canResetPassword?: boolean;
