@@ -24,6 +24,8 @@
     "APP_ENV": "production",
     "APP_DEBUG": "false",
     "LOG_CHANNEL": "stderr",
-    "SESSION_DRIVER": "cookie"
+    "SESSION_DRIVER": "cookie",
+    "DISABLE_WAYFINDER": "true",
+    "NODE_ENV": "production"
   }
 }

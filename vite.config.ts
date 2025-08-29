@@ -21,8 +21,8 @@ const plugins = [
     }),
 ];
 
-// Only add wayfinder plugin if not disabled
-if (!process.env.DISABLE_WAYFINDER) {
+// Only add wayfinder plugin if not disabled and in development
+if (!process.env.DISABLE_WAYFINDER && process.env.NODE_ENV !== 'production') {
     plugins.splice(2, 0, wayfinder({
         formVariants: true,
     }));
