@@ -3,8 +3,8 @@ import Heading from '@/components/Heading.vue';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { appearance } from '@/routes';
-import { edit as editPassword } from '@/routes/password';
-import { edit } from '@/routes/profile';
+import { edit as editPassword } from '@/routes/password/index';
+import { edit } from '@/routes/profile/index';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 

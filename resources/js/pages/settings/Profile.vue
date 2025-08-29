@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { edit } from '@/routes/profile/index';
-import { send } from '@/routes/verification';
+import { send } from '@/routes/verification/index';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 
 import DeleteUser from '@/components/DeleteUser.vue';

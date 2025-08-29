@@ -9,7 +9,7 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import { Form, Head, Link, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 import { register } from '@/routes';
-import { request } from '@/routes/password';
+import { request } from '@/routes/password/index';
 
 defineProps<{
     canResetPassword?: boolean;
