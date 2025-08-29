@@ -2,8 +2,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "powershell -ExecutionPolicy Bypass -File setup-database.ps1 && vite build",
-        "build:production": "powershell -ExecutionPolicy Bypass -File setup-database.ps1 && cross-env DISABLE_WAYFINDER=true vite build",
+        "build": "bash setup-database-unix.sh && vite build",
+        "build:production": "bash setup-database-unix.sh && cross-env DISABLE_WAYFINDER=true vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
         "setup:db": "powershell -ExecutionPolicy Bypass -File setup-database.ps1",

@@ -26,6 +26,8 @@
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
     "DISABLE_WAYFINDER": "true",
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "DB_CONNECTION": "sqlite",
+    "DB_DATABASE": "/tmp/database.sqlite"
   }
 }
