@@ -5,7 +5,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Head, Link, usePage, router } from '@inertiajs/vue3';
 import { Rocket } from 'lucide-vue-next';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { edit } from '@/routes/products/index'
+import { edit, destroy } from '@/routes/products/index'
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -31,7 +31,7 @@ const props = defineProps<Props>();
 
 const deleteProduct = (id: number) => {
     if (confirm("Are you sure you want to delete the product?")) {
-        router.delete(route('products.destroy', (id)));
+        router.delete(destroy(id).url);
     }
 }
 </script>
