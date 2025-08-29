@@ -21,6 +21,24 @@ const form = useForm({
     password: '',
     remember: false,
 });
+
+const handleSubmit = () => {
+    console.log('Login form submitted with data:', form.data());
+    form.post('/login', {
+        onStart: () => {
+            console.log('Login request started');
+        },
+        onSuccess: (page) => {
+            console.log('Login success:', page);
+        },
+        onError: (errors) => {
+            console.log('Login errors:', errors);
+        },
+        onFinish: () => {
+            console.log('Login request finished');
+        }
+    });
+};
 </script>
 
 <template>
@@ -31,7 +49,7 @@ const form = useForm({
             {{ status }}
         </div>
 
-        <Form :form="form" @submit="form.post('/login')" reset-on-success v-slot="{ errors, processing }" class="flex flex-col gap-6">
+        <Form :form="form" @submit="handleSubmit" reset-on-success v-slot="{ errors, processing }" class="flex flex-col gap-6">
             <div class="grid gap-6">
                 <div class="grid gap-2">
                     <Label for="email">Email address</Label>
@@ -44,6 +62,7 @@ const form = useForm({
                         :tabindex="1"
                         autocomplete="email"
                         placeholder="email@example.com"
+                        v-model="form.email"
                     />
                     <InputError :message="errors.email" />
                 </div>
@@ -61,13 +80,14 @@ const form = useForm({
                         :tabindex="2"
                         autocomplete="current-password"
                         placeholder="Password"
+                        v-model="form.password"
                     />
                     <InputError :message="errors.password" />
                 </div>
 
                 <div class="flex items-center justify-between">
                     <Label for="remember" class="flex items-center space-x-3">
-                        <Checkbox id="remember" name="remember" :tabindex="3" />
+                        <Checkbox id="remember" name="remember" :tabindex="3" v-model="form.remember" />
                         <span>Remember me</span>
                     </Label>
                 </div>

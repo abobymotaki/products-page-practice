@@ -15,6 +15,24 @@ const form = useForm({
     password: '',
     password_confirmation: '',
 });
+
+const handleSubmit = () => {
+    console.log('Register form submitted with data:', form.data());
+    form.post('/register', {
+        onStart: () => {
+            console.log('Register request started');
+        },
+        onSuccess: (page) => {
+            console.log('Register success:', page);
+        },
+        onError: (errors) => {
+            console.log('Register errors:', errors);
+        },
+        onFinish: () => {
+            console.log('Register request finished');
+        }
+    });
+};
 </script>
 
 <template>
@@ -23,7 +41,7 @@ const form = useForm({
 
         <Form
             :form="form"
-            @submit="form.post('/register')"
+            @submit="handleSubmit"
             :reset-on-success="['password', 'password_confirmation']"
             v-slot="{ errors, processing }"
             class="flex flex-col gap-6"
@@ -31,19 +49,19 @@ const form = useForm({
             <div class="grid gap-6">
                 <div class="grid gap-2">
                     <Label for="name">Name</Label>
-                    <Input id="name" type="text" required autofocus :tabindex="1" autocomplete="name" name="name" placeholder="Full name" />
+                    <Input id="name" type="text" required autofocus :tabindex="1" autocomplete="name" name="name" placeholder="Full name" v-model="form.name" />
                     <InputError :message="errors.name" />
                 </div>
 
                 <div class="grid gap-2">
                     <Label for="email">Email address</Label>
-                    <Input id="email" type="email" required :tabindex="2" autocomplete="email" name="email" placeholder="email@example.com" />
+                    <Input id="email" type="email" required :tabindex="2" autocomplete="email" name="email" placeholder="email@example.com" v-model="form.email" />
                     <InputError :message="errors.email" />
                 </div>
 
                 <div class="grid gap-2">
                     <Label for="password">Password</Label>
-                    <Input id="password" type="password" required :tabindex="3" autocomplete="new-password" name="password" placeholder="Password" />
+                    <Input id="password" type="password" required :tabindex="3" autocomplete="new-password" name="password" placeholder="Password" v-model="form.password" />
                     <InputError :message="errors.password" />
                 </div>
 
@@ -57,6 +75,7 @@ const form = useForm({
                         autocomplete="new-password"
                         name="password_confirmation"
                         placeholder="Confirm password"
+                        v-model="form.password_confirmation"
                     />
                     <InputError :message="errors.password_confirmation" />
                 </div>
