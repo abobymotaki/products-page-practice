@@ -13,28 +13,38 @@ if [ ! -f ".env" ]; then
     php artisan key:generate --force
 fi
 
-# Ensure database directory exists
-mkdir -p database
+# Check database connection type
+DB_CONNECTION=${DB_CONNECTION:-sqlite}
 
-# Determine database path (use /tmp for Vercel, local database for development)
-if [ "$VERCEL" = "1" ] || [ "$APP_ENV" = "production" ]; then
-    DB_PATH="/tmp/database.sqlite"
-    echo "Using production database path: $DB_PATH"
+if [ "$DB_CONNECTION" = "sqlite" ]; then
+    # SQLite setup (for local development)
+    mkdir -p database
+    
+    # Determine database path (use /tmp for Vercel, local database for development)
+    if [ "$VERCEL" = "1" ] || [ "$APP_ENV" = "production" ]; then
+        DB_PATH="/tmp/database.sqlite"
+        echo "Using production SQLite database path: $DB_PATH"
+    else
+        DB_PATH="database/database.sqlite"
+        echo "Using local SQLite database path: $DB_PATH"
+    fi
+    
+    # Create SQLite database file if it doesn't exist
+    if [ ! -f "$DB_PATH" ]; then
+        touch "$DB_PATH"
+        echo "Created SQLite database file at $DB_PATH"
+    fi
+    
+    # Set proper permissions
+    chmod 664 "$DB_PATH" 2>/dev/null || true
+    if [ "$DB_PATH" = "database/database.sqlite" ]; then
+        chmod 775 database 2>/dev/null || true
+    fi
 else
-    DB_PATH="database/database.sqlite"
-    echo "Using local database path: $DB_PATH"
-fi
-
-# Create SQLite database file if it doesn't exist
-if [ ! -f "$DB_PATH" ]; then
-    touch "$DB_PATH"
-    echo "Created SQLite database file at $DB_PATH"
-fi
-
-# Set proper permissions
-chmod 664 "$DB_PATH" 2>/dev/null || true
-if [ "$DB_PATH" = "database/database.sqlite" ]; then
-    chmod 775 database 2>/dev/null || true
+    # MySQL setup (for production/Vercel)
+    echo "Using MySQL database connection"
+    echo "Database host: ${DB_HOST:-not set}"
+    echo "Database name: ${DB_DATABASE:-not set}"
 fi
 
 # Clear any cached config
