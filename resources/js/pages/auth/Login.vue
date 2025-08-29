@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { Checkbox } from '@/components/ui/checkbox';
 import InputError from '@/components/InputError.vue';
+import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { Form, Head, Link, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import { register } from '@/routes';
+import { request } from '@/routes/password';
+
+defineProps<{
+    canResetPassword?: boolean;
+    status?: string;
+}>();
 
 const form = useForm({
     email: '',
@@ -16,7 +24,7 @@ const form = useForm({
 </script>
 
 <template>
-    <AuthBase title="Log in to your account" description="Enter your email and password below to log in">
+    <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
         <Head title="Log in" />
 
         <div v-if="status" class="mb-4 text-center text-sm font-medium text-green-600">
@@ -75,5 +83,5 @@ const form = useForm({
                 <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
             </div>
         </Form>
-    </AuthBase>
+    </AuthLayout>
 </template>
