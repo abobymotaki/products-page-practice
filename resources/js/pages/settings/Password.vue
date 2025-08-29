@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
 import InputError from '@/components/InputError.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { edit } from '@/routes/password';
-import { Form, Head } from '@inertiajs/vue3';
+import { Form, Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import { LoaderCircle } from 'lucide-vue-next';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import { Button } from '@/components/ui/button';
@@ -22,6 +22,12 @@ const breadcrumbItems: BreadcrumbItem[] = [
 
 const passwordInput = ref<HTMLInputElement | null>(null);
 const currentPasswordInput = ref<HTMLInputElement | null>(null);
+
+const form = useForm({
+    current_password: '',
+    password: '',
+    password_confirmation: '',
+});
 </script>
 
 <template>
@@ -33,7 +39,8 @@ const currentPasswordInput = ref<HTMLInputElement | null>(null);
                 <HeadingSmall title="Update password" description="Ensure your account is using a long, random password to stay secure" />
 
                 <Form
-                    v-bind="PasswordController.update.form()"
+                    :form="form"
+                    @submit="form.put('/password')"
                     :options="{
                         preserveScroll: true,
                     }"

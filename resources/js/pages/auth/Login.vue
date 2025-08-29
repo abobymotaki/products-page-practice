@@ -1,21 +1,18 @@
 <script setup lang="ts">
-import AuthenticatedSessionController from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
+import Checkbox from '@/components/Checkbox.vue';
 import InputError from '@/components/InputError.vue';
-import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AuthBase from '@/layouts/AuthLayout.vue';
-import { register } from '@/routes';
-import { request } from '@/routes/password';
-import { Form, Head } from '@inertiajs/vue3';
+import AuthLayout from '@/layouts/AuthLayout.vue';
+import { Form, Head, Link, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 
-defineProps<{
-    status?: string;
-    canResetPassword: boolean;
-}>();
+const form = useForm({
+    email: '',
+    password: '',
+    remember: false,
+});
 </script>
 
 <template>
@@ -26,12 +23,7 @@ defineProps<{
             {{ status }}
         </div>
 
-        <Form
-            v-bind="AuthenticatedSessionController.store.form()"
-            :reset-on-success="['password']"
-            v-slot="{ errors, processing }"
-            class="flex flex-col gap-6"
-        >
+        <Form :form="form" @submit="form.post('/login')" reset-on-success v-slot="{ errors, processing }" class="flex flex-col gap-6">
             <div class="grid gap-6">
                 <div class="grid gap-2">
                     <Label for="email">Email address</Label>
