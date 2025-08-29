@@ -2,7 +2,7 @@
 import InputError from '@/components/InputError.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { edit } from '@/routes/password';
+import { edit } from '@/routes/password/index';
 import { Form, Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { LoaderCircle } from 'lucide-vue-next';
