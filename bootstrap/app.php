@@ -7,7 +7,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 
-return Application::configure(basePath: dirname(__DIR__))
+$app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
@@ -25,3 +25,21 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
+
+$app->singleton(\Illuminate\Foundation\PackageManifest::class, function ($app) {
+    return new class($app['files'], $app->basePath(), '/tmp/bootstrap/cache/services.php') extends \Illuminate\Foundation\PackageManifest {
+        public function build()
+        {
+            if (file_exists($this->manifestPath)) {
+                return;
+            }
+            $dirname = dirname($this->manifestPath);
+            if (!is_dir($dirname)) {
+                @mkdir($dirname, 0755, true);
+            }
+            parent::build();
+        }
+    };
+});
+
+return $app;
