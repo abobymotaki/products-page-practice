@@ -27,7 +27,8 @@ $app = Application::configure(basePath: dirname(__DIR__))
     })->create();
 
 $app->singleton(\Illuminate\Foundation\PackageManifest::class, function ($app) {
-    return new class($app['files'], $app->basePath(), '/tmp/bootstrap/cache/services.php') extends \Illuminate\Foundation\PackageManifest {
+    $files = new \Illuminate\Filesystem\Filesystem();
+    return new class($files, $app->basePath(), '/tmp/bootstrap/cache/services.php') extends \Illuminate\Foundation\PackageManifest {
         public function build()
         {
             if (file_exists($this->manifestPath)) {
